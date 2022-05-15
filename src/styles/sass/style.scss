@@ -1,0 +1,9 @@
+@import "./global";
+@import "./components/nav";
+@import "./components/main-content";
+
+body {
+  background: $primary-color;
+  font-family: mainFont;
+  color: $text-color;
+}

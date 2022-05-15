@@ -1,0 +1,26 @@
+main {
+  padding: 2rem 0;
+  .content {
+    @include flexBox(center, center);
+    gap: 2rem;
+    header {
+      h1 {
+        max-width: 600px;
+        font-size: 55px;
+      }
+      //new game button
+      .create-a-game {
+        margin-top: 50px;
+        a {
+          border-radius: 10px;
+          background-color: $third-color;
+          color: $second-color;
+          font-size: 25px;
+          padding: 15px 25px;
+          text-decoration: none;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

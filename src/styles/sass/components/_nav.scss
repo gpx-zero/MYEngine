@@ -1,0 +1,32 @@
+nav {
+  background: $second-color;
+  padding: 15px 20px;
+  @include flexBox(center, space-between);
+  .brand-name {
+    @include flexBox(center, center);
+    gap: 20px;
+    h1 {
+      font-size: 35px;
+      color: $third-color;
+    }
+  }
+  .nav-list-items {
+    @include flexBox(center, center);
+    gap: 30px;
+    a {
+      color: $third-color;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .login-button {
+      a {
+        background: $third-color;
+        padding: 10px 20px;
+        font-size: 17px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: $second-color;
+      }
+    }
+  }
+}

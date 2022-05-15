@@ -1,0 +1,82 @@
+@font-face {
+  font-family: mainFont;
+  src: url(../fonts/RobotoFlex-Regular.ttf);
+}
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  background: #071d5a;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .brand-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+nav .brand-name h1 {
+  font-size: 35px;
+  color: #fad500;
+}
+nav .nav-list-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+nav .nav-list-items a {
+  color: #fad500;
+  font-weight: bold;
+  text-decoration: none;
+}
+nav .nav-list-items .login-button a {
+  background: #fad500;
+  padding: 10px 20px;
+  font-size: 17px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #071d5a;
+}
+
+main {
+  padding: 2rem 0;
+}
+main .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+main .content header h1 {
+  max-width: 600px;
+  font-size: 55px;
+}
+main .content header .create-a-game {
+  margin-top: 50px;
+}
+main .content header .create-a-game a {
+  border-radius: 10px;
+  background-color: #fad500;
+  color: #071d5a;
+  font-size: 25px;
+  padding: 15px 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+body {
+  background: #001d6e;
+  font-family: mainFont;
+  color: #ede6db;
+}
+
+/*# sourceMappingURL=main.css.map */
