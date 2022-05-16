@@ -19,6 +19,14 @@ main {
           padding: 15px 25px;
           text-decoration: none;
           font-weight: bold;
+          transition: 300ms;
+          &:hover {
+            background-color: darken($third-color, 15%);
+          }
+          &:active {
+            position: relative;
+            top: 2px;
+          }
         }
       }
     }
