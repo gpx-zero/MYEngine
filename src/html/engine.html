@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="../images/my-engine-logo.png">
 		<link rel="stylesheet" type="text/css" href="../styles/css/engine.css">
 		<title>MYEngine - Engine</title>
-		<script src="../scripts/engine-script.js" defer></script>
 	</head>
 	<body> 
 		<main>
-			<div class="menus" id="top-menu">options</div>
-			<div class="menus" id="left-menu">options</div>
+			<div class="menus" id="top-menu">
+				<button id="create-project" onmousedown="create()">╋ Create</button>
+			</div>
+			<div class="menus" id="left-menu">
+				options
+			</div>
 			<div id="main-context">
-				<canvas id="canvas" width="1000px" height="600"></canvas>
+				<canvas id="canvas"></canvas>
 			</div>
 		</main>
+		<script src="../scripts/engine-script/modules/config.js"></script>
+		<script src="../scripts/engine-script/modules/class.js"></script>
+		<script src="../scripts/engine-script/modules/functions.js"></script>
+		<script src="../scripts/engine-script/engine-script.js"></script>
 	</body>
 </html>

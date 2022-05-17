@@ -14,7 +14,7 @@ main {
     text-align: center;
 }
 .menus {
-    background-color: #041236;
+    background-color: #101025;
     padding: 10px;
     position: absolute;
 }
@@ -31,7 +31,7 @@ main {
     border-top: solid 1px #888;
 }
 #main-context {
-    background-color: #4a6ac5;
+    background-color: #18183a;
     cursor:pointer;
     position:absolute;
     width: 80%;
@@ -39,10 +39,20 @@ main {
     overflow: hidden;
 }
 #canvas {
-    background-color: #ffffff;
+    background-color: #99b;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#create-project {
+    background-color: #fad500;
+    width: 100%;
+    color: #071d5a;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
 }
 body {
     background: #001d6e;
