@@ -1,3 +1,6 @@
 /* Engine script - main script */
 
-run();
+'use strict';
+window.onload = ()=>{
+    run();
+}

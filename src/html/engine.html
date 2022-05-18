@@ -6,22 +6,55 @@
 		<link rel="shortcut icon" href="../images/my-engine-logo.png">
 		<link rel="stylesheet" type="text/css" href="../styles/css/engine.css">
 		<title>MYEngine - Engine</title>
-	</head>
-	<body> 
-		<main>
-			<div class="menus" id="top-menu">
-				<button id="create-project" onmousedown="create()">╋ Create</button>
-			</div>
-			<div class="menus" id="left-menu">
-				options
-			</div>
-			<div id="main-context">
-				<canvas id="canvas"></canvas>
-			</div>
-		</main>
 		<script src="../scripts/engine-script/modules/config.js"></script>
-		<script src="../scripts/engine-script/modules/class.js"></script>
+		<script src="../scripts/engine-script/modules/context.js"></script>
+		<script src="../scripts/engine-script/modules/objects.js"></script>
+		<script src="../scripts/engine-script/modules/object.js"></script>
 		<script src="../scripts/engine-script/modules/functions.js"></script>
 		<script src="../scripts/engine-script/engine-script.js"></script>
+	</head>
+	<body> 
+		<div id="select-object">☒</div>
+		<main>
+			<div class="menus" id="right-menu">
+				<button id="create-new-context" onmousedown="createNewContext()">╋ Create new</button>
+				<div class="options">
+					<p>background<input id="context-background" type="color" value="#e0e0e0"></p>
+				</div>
+				<div class="options" id="context-resolution">
+					<p>resolution</p>
+					<p>width<input id="context-width" type="number" value="1000"></p>
+					<p>height<input id="context-height" type="number" value="600"></p>
+				</div>
+				<div class="options" id="context-objects">
+					<p>objects</p>
+					<p>name<input id="context-objects-name" type="text"></p>
+					<p>
+						type
+						<select>
+							<option>player</option>
+							<option>tools</option>
+							<option>inanimate</option>
+							<option>decoration</option>
+							<option>lighting</option>
+						</select>
+					</p>
+					<p><input type="button" value="create"></p>
+				</div>
+				<div class="options" id="context-objects-list">
+					<p id="context-objects-list-p"></p>
+				</div>
+			</div>
+			<div class="menus" id="bottom-menu">
+				<div class="options" id="context-objects-display">
+					<p>Animation + Game logic will be here ... </p>
+					<p></p>
+					<p></p>
+					<p></p>
+					<p></p>
+				</div>
+			</div>
+			<div id="main-context"></div>
+		</main>
 	</body>
 </html>
