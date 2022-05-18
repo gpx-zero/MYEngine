@@ -1,4 +1,3 @@
 /* All engine config are here */
 
-let
-    FPS = 90;
+let ZOOM = 0.1;

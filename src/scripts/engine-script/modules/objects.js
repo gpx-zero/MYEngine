@@ -1,10 +1,11 @@
 /* All global objects */
 
-class Objects{
+class ObjectsList{
 
     constructor(){
 
         this.obj = {};
+        window.selectedObject = '';
 
     }
 
@@ -28,8 +29,15 @@ class Objects{
 
     select(){
         for(let name in this.obj){
-            if(name != 'Context' && this.obj[name].click())
+            if(name != 'context' && this.obj[name].click())
                 return name;
+        }
+        return 'context';
+    }
+
+    run(){
+        for(let name in this.obj){
+            this.obj[name].run();
         }
     }
 

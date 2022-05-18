@@ -1,11 +1,13 @@
 /* All functions used by engine */
 'use strict';
+
 function random(max,min=0){
 	return Math.floor(Math.random()*(max-min+1))+min;
 }
 
 function setup(){
     window.mainLoop = false;
+    window.FPS = 90;
     window.Mouse        = {
         x: undefined,
         y: undefined,
@@ -15,144 +17,73 @@ function setup(){
         click: false,
         wheel: 0,
     };
-    window.OBJECTS = new Objects();
-    window.selected = '';
-    OBJECTS.add('Context', new Context());
-    OBJECTS.add('player', new GObject(100, 200, 50, 50, 10, '#5e5'));
-    OBJECTS.add('element', new GObject(400, 300, 100, 40, 10, '#e55'));
+    window.objsList = new ObjectsList();
+    objsList.add('context', new Context('context'));
+    objectInputs();
 }
 
 function createNewContext(){
     mouse();
-    OBJECTS.obj['Context'].create();
-    OBJECTS.obj['Context'].setup();
+    objsList.obj['context'].create();
+    objsList.obj['context'].setup();
     mainLoop = true;
-    selectList();
 }
 
-/*
-function intro(){
-
-    let word = "",
-    count = 0,
-    Y = 0;
-    CTX.font = "60px Arial";
-    CTX.textAlign = "center";
-    Intro = setInterval(()=>{
-        if(count > 8*10){
-            if(count == 8*60){
-                count = -1;
-                word="";
-            }
-        }
-        else if(count%10==0) word += "▎MYEngine"[count/10]; count++;
-        if(Y == CANVAS.height+600) Y = 600; Y++;
-        CTX.fillStyle = "#111";
-        CTX.fillRect(0, 0, CANVAS.width, CANVAS.height);
-        CTX.fillStyle = "#252";
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-1200, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-1200, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-1200, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-1200, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-900, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-900, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-900, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-600, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-600, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-600, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-600, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-600, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-300, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-300, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-300, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y-300, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y, 10, 10);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y, 5, 5);
-        CTX.fillRect(random(CANVAS.width-20, 0), Y, 10, 10);
-        CTX.fillStyle = "#4a4";
-        CTX.fillText(word, CANVAS.width/2, CANVAS.height/1.2);
-    }, 10);
+function objectInputs(){
+    window.ObjectInputs = {
+        'objectName' : document.getElementById('context-object-name'),
+        'objectType' : document.getElementById('context-object-type'),
+        'objectWidth' : document.getElementById('context-object-width'),
+        'objectHeight' : document.getElementById('context-object-height'),
+        'objectBackground' : document.getElementById('context-object-background'),
+    }
+    for(let input in ObjectInputs)
+        ObjectInputs[input].value = '';
 }
 
-function clearContext(){
-
-    CTX.fillStyle = canvasBackground;
-    CTX.fillRect(0, 0, CANVAS.width, CANVAS.height);
+function createObject(){
+    for(let input in ObjectInputs)
+        if(ObjectInputs[input].value == '') return;
+    objsList.add(
+        ObjectInputs['objectName'].value+' - '+ObjectInputs['objectType'].value,
+        new GObject(
+            ObjectInputs['objectName'].value+' - '+ObjectInputs['objectType'].value,
+            350,
+            350,
+            ObjectInputs['objectWidth'].value,
+            ObjectInputs['objectHeight'].value,
+            10,
+            ObjectInputs['objectBackground'].value
+        )
+    );
+    for(let input in ObjectInputs)
+        ObjectInputs[input].value = '';
 }
 
 function update(){
 
 }
 
-function moveObject(){
-    if(mouseClick && mouseObj.target.id=='canvas'){
-        let mouseX = mouseObj.clientX-(CANVAS.offsetLeft-CANVAS.width/2);
-        let mouseY = mouseObj.clientY-(CANVAS.offsetTop-CANVAS.height/2);
-        console.log(mouseX)
-        for(let name in allObjects.objects){
-            if( allObjects.objects[name].x <= mouseX &&
-                allObjects.objects[name].x+allObjects.objects[name].width >= mouseX &&
-                allObjects.objects[name].y < mouseY &&
-                allObjects.objects[name].y+allObjects.objects[name].height > mouseY
-            ){
-                console.log('click');
-                clearContext();
-                allObjects.objects[name].x = mouseX;
-                allObjects.objects[name].y = mouseY;
-                allObjects.objects[name].draw();
-            }
-        }
-    }
-}
-
-function createOptions(){
-    let rightMenu = document.getElementById('right-menu'),
-        bottomMenu = document.getElementById('bottom-menu');
-    for(let id=0; id<10; id++){
-        rightMenu.innerHTML += '<div class="options">Option</div>';
-        bottomMenu.innerHTML += '<div class="options">Option</div>';
-    }
-}
-
-function createObj(x, y, w, h, b, s){
-
-    allObjects.add('player_1', new MObject(x, y, w, h, b, s));
-    allObjects.draw();
-}
-
-function create(){
-
-    document.getElementById('create-new').remove();
-    clearInterval(Intro);
-    clearContext();
-    createObj(0, 0, 50, 50, '#cc8', 10);
-    createOptions();
-}
-
 function rest(){
 
 }
-*/
 
-function selectList(){
+
+function chooseFromTheList(){
     document.getElementById('context-objects-list-p').innerHTML = '';
-    for(let name in OBJECTS.obj){
+    for(let name in objsList.obj){
         document.getElementById('context-objects-list-p').innerHTML += `
-            <element${selected==name?' style="background-color:#254075"':''}> ${name}</element>
+            <element${selectedObject==name?' style="background-color:#254075"':''}> ${name}</element>
         `
     }
 }
 
 function selectObject(){
     if(Mouse.target=='canvas'||Mouse.target=='main-context'){
-        selected = OBJECTS.select()?OBJECTS.select():'Context';
-        document.getElementById('select-object').innerText = '☑ '+selected;
-    }else{
-        selected = '';
-        document.getElementById('select-object').innerText = '☒';
+        selectedObject = objsList.select();
+        document.getElementById('select-object').innerText = '☑ '+selectedObject;
     }
-    selectList();
+    chooseFromTheList();
 }
 
 function mouse(){
@@ -179,12 +110,8 @@ function run(){
     setup();
     let thisLoop = setInterval(()=>{
         if(mainLoop){
-            OBJECTS.obj['Context'].run();
-            OBJECTS.obj['player'].draw();
-            OBJECTS.obj['player'].move();
-            OBJECTS.obj['element'].draw();
-            OBJECTS.obj['element'].move();
-            ctx.font = "60px Arial";
+            objsList.run();
+            ctx.font = "50px Arial";
             ctx.textAlign = "center";
             ctx.fillStyle = "#444";
             ctx.fillText('MYEngine', canvas.width/2, canvas.height/1.2);

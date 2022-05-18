@@ -2,7 +2,8 @@
 
 class GObject{
 
-    constructor(x, y, width, height, speed, background){
+    constructor(Name, x, y, width, height, speed, background){
+        this.name = Name;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -10,7 +11,9 @@ class GObject{
         this.speed = speed;
         this.background = background;
         this.direction = undefined;
-        this.startX, this.startY;
+        this.startX,
+        this.startY;
+        this.zoom = ZOOM;
     }
 
     draw(){
@@ -19,8 +22,7 @@ class GObject{
     }
 
     move() {
-
-        if(Mouse.click&&selected=='player'){
+        if(Mouse.click&&selectedObject==this.name){
             if(Mouse.target=='canvas'||Mouse.target=='main-context'){
                 this.x = (Mouse.x-(canvas.offsetLeft-canvas.width/2)) - this.startX;
                 this.y = (Mouse.y-(canvas.offsetTop-canvas.height/2)) - this.startY;
@@ -29,17 +31,26 @@ class GObject{
             this.startX = (Mouse.x-(canvas.offsetLeft-canvas.width/2)) - this.x;
             this.startY = (Mouse.y-(canvas.offsetTop-canvas.height/2)) - this.y;
         }
-        console.log((Mouse.x-(canvas.offsetLeft-canvas.width/2)))
+    }
+
+    resize() {
+
 
     }
 
     click(){
+        let XY = objsList.obj['context'].getXYClick();
         return (
-            this.x<=(Mouse.x-(canvas.offsetLeft-canvas.width/2))&&
-            this.x+this.width>=(Mouse.x-(canvas.offsetLeft-canvas.width/2))&&
-            this.y<=(Mouse.y-(canvas.offsetTop-canvas.height/2))&&
-            this.y+this.height>=(Mouse.y-(canvas.offsetTop-canvas.height/2))
+            this.x<=XY[0]&&
+            this.x+this.width>=XY[0]&&
+            this.y<=XY[1]&&
+            this.y+this.height>=XY[1]
         )
+    }
+
+    run(){
+        this.move();
+        this.draw();
     }
 
 }

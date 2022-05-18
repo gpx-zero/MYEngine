@@ -19,19 +19,19 @@
 			<div class="menus" id="right-menu">
 				<button id="create-new-context" onmousedown="createNewContext()">╋ Create new</button>
 				<div class="options">
-					<p>background<input id="context-background" type="color" value="#e0e0e0"></p>
+					<p>background<input id="context-background" type="color" value="#6580d0"></p>
 				</div>
 				<div class="options" id="context-resolution">
 					<p>resolution</p>
 					<p>width<input id="context-width" type="number" value="1000"></p>
 					<p>height<input id="context-height" type="number" value="600"></p>
 				</div>
-				<div class="options" id="context-objects">
+				<div class="options" id="context-object">
 					<p>objects</p>
-					<p>name<input id="context-objects-name" type="text"></p>
+					<p>name<input id="context-object-name" type="text"></p>
 					<p>
 						type
-						<select>
+						<select id="context-object-type">
 							<option>player</option>
 							<option>tools</option>
 							<option>inanimate</option>
@@ -39,7 +39,10 @@
 							<option>lighting</option>
 						</select>
 					</p>
-					<p><input type="button" value="create"></p>
+					<p>width<input id="context-object-width" type="number" value="0"></p>
+					<p>height<input id="context-object-height" type="number" value="0"></p>
+					<p>background<input id="context-object-background" type="color" value="#6580d0"></p>
+					<p><input type="button" value="create" onmousedown="createObject()"></p>
 				</div>
 				<div class="options" id="context-objects-list">
 					<p id="context-objects-list-p"></p>
