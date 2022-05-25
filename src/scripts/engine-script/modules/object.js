@@ -22,11 +22,9 @@ class GObject{
     }
 
     move() {
-        if(Mouse.click&&selectedObject==this.name){
-            if(Mouse.target=='canvas'||Mouse.target=='main-context'){
-                this.x = (Mouse.x-(canvas.offsetLeft-canvas.width/2)) - this.startX;
-                this.y = (Mouse.y-(canvas.offsetTop-canvas.height/2)) - this.startY;
-            }
+        if(Mouse.click&&selectedObject==this.name&&Mouse.target=='canvas'){
+            this.x = (Mouse.x-(canvas.offsetLeft-canvas.width/2)) - this.startX;
+            this.y = (Mouse.y-(canvas.offsetTop-canvas.height/2)) - this.startY;
         }else{
             this.startX = (Mouse.x-(canvas.offsetLeft-canvas.width/2)) - this.x;
             this.startY = (Mouse.y-(canvas.offsetTop-canvas.height/2)) - this.y;
@@ -39,13 +37,16 @@ class GObject{
     }
 
     click(){
-        let XY = objsList.obj['context'].getXYClick();
-        return (
-            this.x<=XY[0]&&
-            this.x+this.width>=XY[0]&&
-            this.y<=XY[1]&&
-            this.y+this.height>=XY[1]
-        )
+        if(Mouse.target == 'canvas'){
+            let XY = objsList.obj['context'].getXYClick();
+            return (
+                this.x<=XY[0]&&
+                this.x+this.width>=XY[0]&&
+                this.y<=XY[1]&&
+                this.y+this.height>=XY[1]
+            )
+        }
+        return false;
     }
 
     run(){
